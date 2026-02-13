@@ -263,6 +263,40 @@
             transition: transform 0.6s ease 0.2s, z-index 0.2s;
             z-index: 3;
             border-radius: 5px 5px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .heart-seal {
+            width: 40px;
+            height: 40px;
+            background: #d6336c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            position: absolute;
+            top: -25px;
+            /* Adjust based on flap size */
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s, opacity 0.3s;
+            cursor: pointer;
+        }
+
+        .heart-seal:hover {
+            transform: scale(1.1);
+        }
+
+        .envelope.open .heart-seal {
+            opacity: 0;
+            transform: scale(0.5);
+            pointer-events: none;
         }
 
         .pocket {
@@ -411,6 +445,13 @@
             overflow-y: auto;
             max-height: 85vh;
             border: 1px solid var(--glass-border);
+            /* Hide scrollbar */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .reasons-container::-webkit-scrollbar {
+            display: none;
         }
 
         .reasons-container h2 {
@@ -449,19 +490,12 @@
             margin-bottom: 12px;
         }
 
-        .reason-card p {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.05rem;
-            color: #555;
-            line-height: 1.5;
-        }
-
-        /* --- CAROUSEL SECTION --- */
-        #carousel-section {
+        /* --- MEMORIES SECTION --- */
+        #memories-section {
             display: none;
             opacity: 0;
             width: 100%;
-            min-height: 50vh;
+            min-height: 100vh;
             background: radial-gradient(circle at center, var(--love-bg-2), var(--love-bg-1));
             position: absolute;
             top: 0;
@@ -471,91 +505,74 @@
             justify-content: center;
             transition: opacity 1s ease;
             z-index: 10;
+            padding: 40px 0;
         }
 
-        .carousel-container {
+        .memories-container {
             width: 90%;
-            max-width: 500px;
-            height: 600px;
-            position: relative;
-            /* Polaroid Look */
-            background: #fff;
-            padding: 20px 20px 80px 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-            transform: rotate(-2deg);
-            transition: transform 0.3s;
+            max-width: 1000px;
+            text-align: center;
         }
 
-        .carousel-container:hover {
-            transform: rotate(0deg);
+        .memories-container h2 {
+            font-family: 'Sacramento', cursive;
+            font-size: 3.5rem;
+            color: #d6336c;
+            margin-bottom: 50px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .slide {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 80px;
+        .memories-grid {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-wrap: wrap;
             justify-content: center;
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-            pointer-events: none;
+            gap: 40px;
+            margin-bottom: 50px;
         }
 
-        .slide.active {
-            opacity: 1;
-            pointer-events: auto;
-            z-index: 10;
+        .memory-card {
+            background: #fff;
+            padding: 15px 15px 50px 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            width: 250px;
+            transition: transform 0.3s ease, z-index 0.3s;
+            position: relative;
+            cursor: pointer;
         }
 
-        .slide img {
+        .memory-card:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            z-index: 100;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .memory-card img {
             width: 100%;
-            height: 100%;
+            height: 200px;
             object-fit: cover;
             border: 1px solid #eee;
         }
 
-        .slide p {
-            position: static;
-            bottom: -50px;
+        .memory-card p {
+            font-family: 'Sacramento', cursive;
+            font-size: 1.8rem;
+            color: #333;
+            position: absolute;
+            bottom: 10px;
             left: 0;
             width: 100%;
             text-align: center;
-            font-family: 'Sacramento', cursive;
-            font-size: 2rem;
-            color: #333;
         }
 
-        .carousel-nav {
-            margin-top: 40px;
-            display: flex;
-            gap: 20px;
+        .reason-card p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.5;
         }
 
-        .carousel-btn {
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(5px);
-            font-size: 2rem;
-            cursor: pointer;
-            color: white;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
+        /* --- CAROUSEL SECTION (STACK) --- */
 
-        .carousel-btn:hover {
-            background: white;
-            color: var(--love-text);
-            transform: scale(1.1);
-        }
 
         /* --- PROPOSAL SECTION --- */
         #proposal-section {
@@ -624,8 +641,7 @@
             font-weight: bold;
             background: #e1b12c;
             color: white;
-            position: absolute;
-            /* Absolute for movement */
+            /* Relative initially so it sits next to Yes button */
             transition: all 0.2s ease;
             box-shadow: 0 5px 15px rgba(225, 177, 44, 0.4);
         }
@@ -644,12 +660,21 @@
             z-index: 300;
             opacity: 0;
             transition: opacity 1s ease;
+            text-align: center;
         }
 
         .success-message h1 {
             font-family: 'Sacramento', cursive;
             font-size: 4rem;
             color: #d6336c;
+            margin-bottom: 20px;
+        }
+
+        .success-message p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            color: #333;
+            /* Dark text for visibility */
             margin-bottom: 20px;
         }
 
@@ -791,7 +816,9 @@
         <!-- ENVELOPE -->
         <div class="envelope-wrapper" id="envelope-wrapper">
             <div class="envelope" id="envelope">
-                <div class="flap"></div>
+                <div class="flap">
+                    <div class="heart-seal">❤</div>
+                </div>
                 <div class="pocket"></div>
                 <div class="letter-preview">For You...</div>
             </div>
@@ -849,39 +876,43 @@
         </div>
     </div>
 
-    <!-- CAROUSEL SECTION -->
-    <div id="carousel-section">
-        <div class="carousel-container">
-            <!-- Slide 1 -->
-            <div class="slide active">
-                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1974&auto=format&fit=crop"
-                    alt="Memory 1">
-                <p>Remember our first date? I knew right then...</p>
-            </div>
-            <!-- Slide 2 -->
-            <div class="slide">
-                <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=2069&auto=format&fit=crop"
-                    alt="Memory 2">
-                <p>Every adventure with you is my favorite.</p>
-            </div>
-            <!-- Slide 3 -->
-            <div class="slide">
-                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=2065&auto=format&fit=crop"
-                    alt="Memory 3">
-                <p>Just being around you makes me smile.</p>
-            </div>
-        </div>
 
-        <div class="carousel-nav">
-            <button class="carousel-btn" id="prev-btn">❮</button>
-            <button class="carousel-btn" id="next-btn">❯</button>
-        </div>
 
-        <button class="btn-continue" id="carousel-finish-btn"
-            style="display:none; width: auto; padding: 15px 40px; margin-top: 20px;">I Have A Question...</button>
     </div>
 
-    <!-- PROPOSAL SECTION -->
+    <!-- MEMORIES SECTION -->
+    <div id="memories-section">
+        <div class="memories-container">
+            <h2>Our Beautiful Memories</h2>
+            <div class="memories-grid">
+                <!-- Memory 1 -->
+                <div class="memory-card" style="transform: rotate(-3deg);">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1974&auto=format&fit=crop"
+                        alt="Memory 1">
+                    <p>The day we met...</p>
+                </div>
+                <!-- Memory 2 -->
+                <div class="memory-card" style="transform: rotate(2deg); margin-top: 30px;">
+                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=2069&auto=format&fit=crop"
+                        alt="Memory 2">
+                    <p>Unexpected adventures.</p>
+                </div>
+                <!-- Memory 3 -->
+                <div class="memory-card" style="transform: rotate(-4deg);">
+                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=2065&auto=format&fit=crop"
+                        alt="Memory 3">
+                    <p>Simple moments.</p>
+                </div>
+                <!-- Memory 4 -->
+                <div class="memory-card" style="transform: rotate(3deg); margin-top: 20px;">
+                    <img src="https://images.unsplash.com/photo-1621600411688-4be93cd68504?q=80&w=2064&auto=format&fit=crop"
+                        alt="Memory 4">
+                    <p>Side by side.</p>
+                </div>
+            </div>
+            <button class="btn-continue" id="memories-continue-btn">I Have A Question...</button>
+        </div>
+    </div>
     <div id="proposal-section">
         <canvas id="confetti-canvas"></canvas>
         <h1>Will You Be My Valentine?</h1>
@@ -907,7 +938,7 @@
         <h1>Yay! I Love You! 💖</h1>
         <p>Best decision ever! 🥰</p>
         <br>
-        <button class="btn-yes" onclick="window.location.href='sms:?body=Yes! I will be your Valentine! 💖'">Send
+        <button class="btn-yes" onclick="window.location.href=''">Send
             Answer</button>
     </div>
 
@@ -927,17 +958,19 @@
         const reasonsSection = document.getElementById('reasons-section');
         const reasonsContinueBtn = document.getElementById('reasons-continue-btn');
 
+        const memoriesSection = document.getElementById('memories-section');
+        const memoriesContinueBtn = document.getElementById('memories-continue-btn');
+
         const musicControls = document.getElementById('music-controls');
         const musicBtn = document.getElementById('music-btn');
         const volumeSlider = document.getElementById('volume-slider');
         const bgMusic = document.getElementById('bg-music');
         let isMusicPlaying = false;
 
-        const carouselSection = document.getElementById('carousel-section');
-        const slides = document.querySelectorAll('.slide');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const carouselFinishBtn = document.getElementById('carousel-finish-btn');
+        const slides = null; // Removed
+        const prevBtn = null; // Removed
+        const nextBtn = null; // Removed
+        const carouselFinishBtn = null; // Removed
 
         const proposalSection = document.getElementById('proposal-section');
         const yesBtn = document.getElementById('yes-btn');
@@ -1049,14 +1082,38 @@
             }, 800);
         });
 
-        // 5. Continue to Carousel
+        // 5. Continue to Memories (Skipping Carousel logic entirely)
         reasonsContinueBtn.addEventListener('click', () => {
             reasonsSection.style.opacity = '0';
             setTimeout(() => {
                 reasonsSection.style.display = 'none';
-                carouselSection.style.display = 'flex';
+                memoriesSection.style.display = 'flex';
                 setTimeout(() => {
-                    carouselSection.style.opacity = '1';
+                    memoriesSection.style.opacity = '1';
+                }, 50);
+            }, 800);
+        });
+
+        // 5. Continue to Memories (Skipping Carousel)
+        reasonsContinueBtn.addEventListener('click', () => {
+            reasonsSection.style.opacity = '0';
+            setTimeout(() => {
+                reasonsSection.style.display = 'none';
+                memoriesSection.style.display = 'flex';
+                setTimeout(() => {
+                    memoriesSection.style.opacity = '1';
+                }, 50);
+            }, 800);
+        });
+
+        // 6. Continue to Proposal
+        memoriesContinueBtn.addEventListener('click', () => {
+            memoriesSection.style.opacity = '0';
+            setTimeout(() => {
+                memoriesSection.style.display = 'none';
+                proposalSection.style.display = 'flex';
+                setTimeout(() => {
+                    proposalSection.style.opacity = '1';
                 }, 50);
             }, 800);
         });
@@ -1076,75 +1133,27 @@
             bgMusic.volume = e.target.value;
         });
 
-        // 5. Carousel Logic
-        let currentSlide = 0;
+        // 5. Carousel Logic (Card Stack)
 
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.remove('active');
-                if (i === index) slide.classList.add('active');
-            });
-
-            // Handle buttons
-            if (index === slides.length - 1) {
-                nextBtn.style.display = 'none';
-                carouselFinishBtn.style.display = 'block';
-            } else {
-                nextBtn.style.display = 'flex';
-                carouselFinishBtn.style.display = 'none';
-            }
-
-            if (index === 0) {
-                prevBtn.style.display = 'none';
-            } else {
-                prevBtn.style.display = 'flex';
-            }
-        }
-
-        nextBtn.addEventListener('click', () => {
-            if (currentSlide < slides.length - 1) {
-                currentSlide++;
-                showSlide(currentSlide);
-            }
-        });
-
-        prevBtn.addEventListener('click', () => {
-            if (currentSlide > 0) {
-                currentSlide--;
-                showSlide(currentSlide);
-            }
-        });
-
-        // Initial check
-        showSlide(0);
-
-        // 6. Finish Carousel -> Proposal
-        carouselFinishBtn.addEventListener('click', () => {
-            carouselSection.style.opacity = '0';
-            setTimeout(() => {
-                carouselSection.style.display = 'none';
-                proposalSection.style.display = 'flex';
-                setTimeout(() => {
-                    proposalSection.style.opacity = '1';
-                }, 50);
-            }, 800);
-        });
 
         // 7. No Button Avoidance & Growing Yes Button
         let noClickCount = 0;
         const noTexts = ["No 😢", "Are you sure?", "Really?", "Think again!", "Last chance!", "You can't do this!", "Please? 🥺", "Don't break my heart!"];
         let yesScale = 1;
 
-        // Mouseover (PC) and Touchstart (Mobile)
+
         const moveHandler = (e) => {
             // Prevent default if it's touch to avoid accidental clicking
-            if (e.type === 'touchstart') e.preventDefault();
+            // if (e.type === 'touchstart') e.preventDefault(); 
+            // Commented out preventDefault to allow clicking if they manage to catch it, 
+            // but usually we want it to move BEFORE click.
 
             moveNoButton();
         };
 
         // Click handler for "No" to make it even harder and grow Yes
-        noBtn.addEventListener('click', () => {
+        noBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Stop it from doing anything else
             noClickCount++;
             // Update text
             const textIndex = Math.min(noClickCount, noTexts.length - 1);
@@ -1157,21 +1166,30 @@
             moveNoButton();
         });
 
-        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('mouseover', moveHandler);
         noBtn.addEventListener('touchstart', moveHandler);
 
         function moveNoButton() {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth) - (window.innerWidth / 2);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight) - (window.innerHeight / 2);
 
-            // Limit bounds to stay somewhat on screen
-            const maxX = window.innerWidth / 3;
-            const maxY = window.innerHeight / 3;
 
-            const safeX = Math.max(-maxX, Math.min(maxX, x));
-            const safeY = Math.max(-maxY, Math.min(maxY, y));
+            // Calculate random position within the viewport
+            // We need to account for button size so it doesn't go off screen
+            const btnWidth = noBtn.offsetWidth || 100; // Fallback width
+            const btnHeight = noBtn.offsetHeight || 50; // Fallback height
 
-            noBtn.style.transform = `translate(${safeX}px, ${safeY}px)`;
+            // Get viewport dimensions
+            const maxX = window.innerWidth - btnWidth - 40; // 40px padding
+            const maxY = window.innerHeight - btnHeight - 40;
+
+            // Generate random X and Y
+            // Math.random() * (max - min) + min
+            const newX = Math.random() * maxX + 20;
+            const newY = Math.random() * maxY + 20;
+
+            // Apply new position
+            noBtn.style.left = `${newX}px`;
+            noBtn.style.top = `${newY}px`;
+            noBtn.style.transform = 'none'; // Clear any previous transform
         }
 
         // 8. Yes Button Climax
