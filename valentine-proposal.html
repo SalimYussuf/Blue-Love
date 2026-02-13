@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute Cat Compilation 2024</title> <!-- Fake Title -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Sacramento&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --youtube-bg: #0f0f0f;
+            --youtube-text: #ffffff;
+            --youtube-secondary: #aaaaaa;
+            --youtube-red: #ff0000;
+            --love-bg-1: #ff9a9e;
+            --love-bg-2: #fad0c4;
+            --love-text: #5c2c2c;
+            --env-color: #ff6b6b;
+            --env-flap-color: #ff8787;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            /* Lock scroll initially */
+            background-color: var(--youtube-bg);
+            color: var(--youtube-text);
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            width: 100vw;
+            transition: background-color 1.5s ease;
+        }
+
+        /* --- FAKE YOUTUBE UI --- */
+        #youtube-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            z-index: 100;
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .yt-header {
+            width: 100%;
+            padding: 0 40px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .yt-logo {
+            font-weight: bold;
+            letter-spacing: -1px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .yt-logo span {
+            color: white;
+        }
+
+        .yt-search-bar {
+            width: 40%;
+            height: 40px;
+            background: #121212;
+            border: 1px solid #303030;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            color: #888;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .yt-video-stage {
+            width: 90%;
+            max-width: 1280px;
+            aspect-ratio: 16/9;
+            background: #000;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .yt-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            /* Placeholder Cat Image */
+            background: url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=2043&auto=format&fit=crop') center/cover no-repeat;
+        }
+
+        .yt-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 68px;
+            height: 48px;
+            background: rgba(33, 33, 33, 0.8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .yt-play-btn::after {
+            content: '';
+            border-style: solid;
+            border-width: 10px 0 10px 20px;
+            border-color: transparent transparent transparent white;
+        }
+
+        .yt-play-btn:hover {
+            background: red;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .yt-info {
+            width: 90%;
+            max-width: 1280px;
+            margin-top: 16px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .yt-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .yt-stats {
+            color: var(--youtube-secondary);
+            font-size: 14px;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* --- GLITCH EFFECT --- */
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 200;
+            display: none;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip-path: inset(40% 0 61% 0);
+                transform: translate(-2px, 2px);
+            }
+
+            20% {
+                clip-path: inset(92% 0 1% 0);
+                transform: translate(2px, -2px);
+            }
+
+            40% {
+                clip-path: inset(43% 0 1% 0);
+                transform: translate(-2px, 2px);
+            }
+
+            60% {
+                clip-path: inset(25% 0 58% 0);
+                transform: translate(2px, -2px);
+            }
+
+            80% {
+                clip-path: inset(54% 0 7% 0);
+                transform: translate(-2px, 2px);
+            }
+
+            100% {
+                clip-path: inset(58% 0 43% 0);
+                transform: translate(2px, -2px);
+            }
+        }
+
+        /* --- MAIN ROMANTIC EXPERIENCE --- */
+        #main-experience {
+            display: none;
+            opacity: 0;
+            width: 100%;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, var(--love-bg-2), var(--love-bg-1));
+            position: absolute;
+            top: 0;
+            left: 0;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: opacity 1.5s ease;
+        }
+
+        /* --- ENVELOPE --- */
+        .envelope-wrapper {
+            perspective: 1000px;
+            cursor: pointer;
+            margin-top: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background: var(--env-color);
+            position: relative;
+            transform-style: preserve-3d;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease;
+            border-radius: 5px;
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 110px solid var(--env-flap-color);
+            transform-origin: top;
+            transition: transform 0.6s ease 0.2s, z-index 0.2s;
+            z-index: 3;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .pocket {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 100px solid #ff4d4d;
+            z-index: 2;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .letter-preview {
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            width: 260px;
+            height: 180px;
+            background: white;
+            z-index: 1;
+            transition: transform 0.6s ease 0.6s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Sacramento', cursive;
+            font-size: 28px;
+            color: var(--love-text);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .envelope.open .flap {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        .envelope.open .letter-preview {
+            transform: translateY(-120px) rotate(-2deg);
+            z-index: 4;
+        }
+
+        /* --- LETTER CONTENT --- */
+        #full-letter {
+            width: 100%;
+            max-width: 600px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: var(--glass-shadow);
+            margin: 40px 20px 20px 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+            display: none;
+            color: var(--love-text);
+        }
+
+        #full-letter h2 {
+            font-family: 'Sacramento', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b6b, #d6336c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #full-letter p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .btn-continue {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8787);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-continue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+        }
+
+        /* --- SECTIONS COMMON --- */
+        .section-screen {
+            display: none;
+            opacity: 0;
+            width: 100%;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, var(--love-bg-2), var(--love-bg-1));
+            position: absolute;
+            top: 0;
+            left: 0;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease;
+            z-index: 10;
+        }
+
+        /* --- REASONS SECTION --- */
+        #reasons-section {
+            display: none;
+            opacity: 0;
+            width: 100%;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, var(--love-bg-2), var(--love-bg-1));
+            position: absolute;
+            top: 0;
+            left: 0;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease;
+            z-index: 10;
+        }
+
+        .reasons-container {
+            width: 90%;
+            max-width: 900px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: var(--glass-shadow);
+            text-align: center;
+            overflow-y: auto;
+            max-height: 85vh;
+            border: 1px solid var(--glass-border);
+        }
+
+        .reasons-container h2 {
+            font-family: 'Sacramento', cursive;
+            font-size: 3.5rem;
+            color: #d6336c;
+            margin-bottom: 40px;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .reason-card {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: default;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .reason-card h3 {
+            font-family: 'Sacramento', cursive;
+            font-size: 2rem;
+            color: #d6336c;
+            margin-bottom: 12px;
+        }
+
+        .reason-card p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* --- CAROUSEL SECTION --- */
+        #carousel-section {
+            display: none;
+            opacity: 0;
+            width: 100%;
+            min-height: 50vh;
+            background: radial-gradient(circle at center, var(--love-bg-2), var(--love-bg-1));
+            position: absolute;
+            top: 0;
+            left: 0;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease;
+            z-index: 10;
+        }
+
+        .carousel-container {
+            width: 90%;
+            max-width: 500px;
+            height: 600px;
+            position: relative;
+            /* Polaroid Look */
+            background: #fff;
+            padding: 20px 20px 80px 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            transform: rotate(-2deg);
+            transition: transform 0.3s;
+        }
+
+        .carousel-container:hover {
+            transform: rotate(0deg);
+        }
+
+        .slide {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 10;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 1px solid #eee;
+        }
+
+        .slide p {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: 'Sacramento', cursive;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .carousel-nav {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .carousel-btn {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            font-size: 2rem;
+            cursor: pointer;
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            color: var(--love-text);
+            transform: scale(1.1);
+        }
+
+        /* --- PROPOSAL SECTION --- */
+        #proposal-section {
+            display: none;
+            opacity: 0;
+            width: 100%;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, var(--love-bg-2), var(--love-bg-1));
+            position: absolute;
+            top: 0;
+            left: 0;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease;
+            z-index: 10;
+        }
+
+        #proposal-section h1 {
+            font-family: 'Sacramento', cursive;
+            font-size: 5rem;
+            color: #d6336c;
+            margin-bottom: 60px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: heartbeat 1.5s infinite;
+            padding: 0 20px;
+        }
+
+        .buttons-box {
+            display: flex;
+            gap: 40px;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            /* Space for moving button */
+            width: 100%;
+        }
+
+        .btn-yes {
+            padding: 20px 60px;
+            font-size: 2rem;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(76, 209, 55, 0.4);
+            background: #4cd137;
+            color: white;
+            z-index: 20;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            background: #44bd32;
+            box-shadow: 0 15px 35px rgba(76, 209, 55, 0.6);
+        }
+
+        .btn-no {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            background: #e1b12c;
+            color: white;
+            position: absolute;
+            /* Absolute for movement */
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 15px rgba(225, 177, 44, 0.4);
+        }
+
+        .success-message {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 300;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .success-message h1 {
+            font-family: 'Sacramento', cursive;
+            font-size: 4rem;
+            color: #d6336c;
+            margin-bottom: 20px;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.1);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.1);
+            }
+
+            60% {
+                transform: scale(1);
+            }
+        }
+
+        .floating-heart {
+            position: fixed;
+            color: #ff6b6b;
+            animation: floatUp linear forwards;
+            z-index: 0;
+            user-select: none;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(110vh) rotate(0deg);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            display: none;
+        }
+
+        /* --- MUSIC CONTROLS --- */
+        #music-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 12px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+            opacity: 0;
+            /* Hidden initially */
+            pointer-events: none;
+        }
+
+        #music-controls.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #music-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            transition: transform 0.2s;
+        }
+
+        #music-btn:hover {
+            transform: scale(1.2);
+        }
+
+        #volume-slider {
+            width: 80px;
+            accent-color: var(--love-text);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- FAKE YOUTUBE UI -->
+    <div id="youtube-container">
+        <div class="yt-header">
+            <div class="yt-logo"><span>▶</span> YouTube</div>
+            <div class="yt-search-bar">Search</div>
+            <div style="width: 32px; height: 32px; background: #555; border-radius: 50%;"></div>
+        </div>
+
+        <div class="yt-video-stage" id="video-stage">
+            <div class="yt-thumbnail"></div>
+            <div class="yt-play-btn" id="play-btn"></div>
+            <video id="intro-video" src="cat_video.mp4"
+                style="width:100%; height:100%; object-fit:cover; display:none;"></video>
+        </div>
+
+        <div class="yt-info">
+            <div class="yt-title">Top 10 Cutest Cats Compilation 2024 (Must Watch!)</div>
+            <div class="yt-stats">
+                <span>The Meow Channel</span>
+                <span>• 2.4M views</span>
+                <span>• 3 hours ago</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- GLITCH OVERLAY -->
+    <div class="glitch-overlay" id="glitch-overlay"></div>
+
+    <!-- MAIN ROMANTIC EXPERIENCE -->
+    <div id="main-experience">
+
+        <!-- ENVELOPE -->
+        <div class="envelope-wrapper" id="envelope-wrapper">
+            <div class="envelope" id="envelope">
+                <div class="flap"></div>
+                <div class="pocket"></div>
+                <div class="letter-preview">For You...</div>
+            </div>
+        </div>
+
+        <!-- FULL LETTER CONTENT -->
+        <div id="full-letter">
+            <h2>My Dearest Valentine,</h2>
+            <p>
+                <!-- CUSTOMIZABLE MESSAGE START -->
+                I know this started as a funny cat video, but I wanted to surprise you with something a little more
+                special.
+            </p>
+            <p>
+                From the moment you walked into my life, everything became brighter. Your smile is my favorite scene,
+                and your laugh is my favorite soundtrack.
+            </p>
+            <p>
+                I don't need a special day to tell you how much you mean to me, but I wanted to take this moment to ask
+                you something important...
+                <!-- CUSTOMIZABLE MESSAGE END -->
+            </p>
+            <button class="btn-continue" id="letter-continue-btn">Continue...</button>
+        </div>
+
+    </div>
+
+    <!-- REASONS SECTION -->
+    <div id="reasons-section">
+        <div class="reasons-container">
+            <h2>Reasons I Love You</h2>
+            <div class="reasons-grid">
+                <!-- Reason 1 -->
+                <div class="reason-card">
+                    <h3>Your Smile</h3>
+                    <p>It brightens up my darkest days and makes everything better.</p>
+                </div>
+                <!-- Reason 2 -->
+                <div class="reason-card">
+                    <h3>Your Kindness</h3>
+                    <p>You have the biggest heart and care so much for others.</p>
+                </div>
+                <!-- Reason 3 -->
+                <div class="reason-card">
+                    <h3>Your Laugh</h3>
+                    <p>It's the most beautiful melody I've ever heard.</p>
+                </div>
+                <!-- Reason 4 -->
+                <div class="reason-card">
+                    <h3>Just You</h3>
+                    <p>I love everything about you, exactly the way you are.</p>
+                </div>
+            </div>
+            <button class="btn-continue" id="reasons-continue-btn">Continue...</button>
+        </div>
+    </div>
+
+    <!-- CAROUSEL SECTION -->
+    <div id="carousel-section">
+        <div class="carousel-container">
+            <!-- Slide 1 -->
+            <div class="slide active">
+                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1974&auto=format&fit=crop"
+                    alt="Memory 1">
+                <p>Remember our first date? I knew right then...</p>
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=2069&auto=format&fit=crop"
+                    alt="Memory 2">
+                <p>Every adventure with you is my favorite.</p>
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide">
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=2065&auto=format&fit=crop"
+                    alt="Memory 3">
+                <p>Just being around you makes me smile.</p>
+            </div>
+        </div>
+
+        <div class="carousel-nav">
+            <button class="carousel-btn" id="prev-btn">❮</button>
+            <button class="carousel-btn" id="next-btn">❯</button>
+        </div>
+
+        <button class="btn-continue" id="carousel-finish-btn"
+            style="display:none; width: auto; padding: 15px 40px; margin-top: 20px;">I Have A Question...</button>
+    </div>
+
+    <!-- PROPOSAL SECTION -->
+    <div id="proposal-section">
+        <canvas id="confetti-canvas"></canvas>
+        <h1>Will You Be My Valentine?</h1>
+        <div class="buttons-box">
+            <button class="btn-yes" id="yes-btn">YES! 💖</button>
+            <button class="btn-no" id="no-btn">No 😢</button>
+        </div>
+    </div>
+
+    <!-- MUSIC ELEMENT & CONTROLS -->
+    <audio id="bg-music" loop>
+        <source src="love_song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div id="music-controls">
+        <button id="music-btn">🎵</button>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
+    </div>
+
+    <!-- SUCCESS MESSAGE -->
+    <div class="success-message" id="success-screen">
+        <h1>Yay! I Love You! 💖</h1>
+        <p>Best decision ever! 🥰</p>
+        <br>
+        <button class="btn-yes" onclick="window.location.href='sms:?body=Yes! I will be your Valentine! 💖'">Send
+            Answer</button>
+    </div>
+
+    <script>
+        // --- LOGIC ---
+        const playBtn = document.getElementById('play-btn');
+        const introVideo = document.getElementById('intro-video');
+        const thumbnail = document.querySelector('.yt-thumbnail');
+        const youtubeContainer = document.getElementById('youtube-container');
+        const glitchOverlay = document.getElementById('glitch-overlay');
+        const mainExperience = document.getElementById('main-experience');
+        const envelopeWrapper = document.getElementById('envelope-wrapper');
+        const envelope = document.getElementById('envelope');
+        const fullLetter = document.getElementById('full-letter');
+
+        const letterContinueBtn = document.getElementById('letter-continue-btn');
+        const reasonsSection = document.getElementById('reasons-section');
+        const reasonsContinueBtn = document.getElementById('reasons-continue-btn');
+
+        const musicControls = document.getElementById('music-controls');
+        const musicBtn = document.getElementById('music-btn');
+        const volumeSlider = document.getElementById('volume-slider');
+        const bgMusic = document.getElementById('bg-music');
+        let isMusicPlaying = false;
+
+        const carouselSection = document.getElementById('carousel-section');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const carouselFinishBtn = document.getElementById('carousel-finish-btn');
+
+        const proposalSection = document.getElementById('proposal-section');
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const successScreen = document.getElementById('success-screen');
+        const body = document.body;
+
+        // 1. YouTube Play & Glitch
+        playBtn.addEventListener('click', () => {
+            playBtn.style.display = 'none';
+            thumbnail.style.opacity = '0';
+            setTimeout(() => thumbnail.style.display = 'none', 500);
+
+            introVideo.style.display = 'block';
+            introVideo.play();
+
+            // Unlock Audio Context on first interaction
+            if (bgMusic.paused) {
+                bgMusic.volume = 0.5;
+                // We don't play yet, but we prepare it
+            }
+
+            // Play for 10 seconds then glitch
+            setTimeout(() => {
+                triggerGlitch();
+            }, 10000); // 10 seconds
+        });
+
+        function triggerGlitch() {
+            introVideo.pause();
+            glitchOverlay.style.display = 'block';
+            setTimeout(() => { glitchOverlay.style.opacity = '0.9'; }, 10);
+            glitchOverlay.style.animation = 'glitch-anim 0.2s infinite';
+
+            youtubeContainer.style.transform = 'scale(1.02)';
+            setTimeout(() => { youtubeContainer.style.transform = 'scale(1)'; }, 100);
+
+            setTimeout(() => {
+                // Fade out YouTube, Fade in Romantic
+                glitchOverlay.style.opacity = '0';
+                youtubeContainer.style.opacity = '0';
+
+                setTimeout(() => {
+                    glitchOverlay.style.display = 'none';
+                    youtubeContainer.style.display = 'none';
+                    startRomanticMode();
+                }, 1000);
+
+            }, 1500);
+        }
+
+        // 2. Romantic Mode Start
+        function startRomanticMode() {
+            body.style.backgroundColor = 'var(--love-bg-1)'; // Fallback
+            body.style.overflow = 'auto';
+
+            mainExperience.style.display = 'flex';
+            setTimeout(() => {
+                mainExperience.style.opacity = '1';
+                startFloatingHearts();
+                // Show music controls nicely
+                musicControls.style.display = 'flex';
+                setTimeout(() => musicControls.classList.add('visible'), 100);
+            }, 100);
+        }
+
+        // 3. Envelope Interaction
+        envelopeWrapper.addEventListener('click', () => {
+            if (!envelope.classList.contains('open')) {
+                envelope.classList.add('open');
+
+                // Play Music if not already playing
+                if (bgMusic.paused) {
+                    bgMusic.play().then(() => {
+                        isMusicPlaying = true;
+                        musicBtn.textContent = '🔊';
+                    }).catch(e => {
+                        console.log("Audio play failed (user interaction needed):", e);
+                        musicBtn.textContent = '🔇';
+                    });
+                }
+
+                // Show Letter after animation
+                setTimeout(() => {
+                    envelopeWrapper.style.transform = 'scale(0.8) translateY(-50px)';
+                    envelopeWrapper.style.opacity = '0';
+                    setTimeout(() => {
+                        envelopeWrapper.style.display = 'none';
+                        fullLetter.style.display = 'block';
+                        setTimeout(() => {
+                            fullLetter.style.opacity = '1';
+                            fullLetter.style.transform = 'translateY(0)';
+                        }, 50);
+                    }, 500);
+                }, 800);
+            }
+        });
+
+        // 4. Continue to Reasons
+        letterContinueBtn.addEventListener('click', () => {
+            fullLetter.style.opacity = '0';
+            fullLetter.style.transform = 'translateY(-20px)';
+            setTimeout(() => {
+                fullLetter.style.display = 'none';
+                reasonsSection.style.display = 'flex';
+                setTimeout(() => {
+                    reasonsSection.style.opacity = '1';
+                }, 50);
+            }, 800);
+        });
+
+        // 5. Continue to Carousel
+        reasonsContinueBtn.addEventListener('click', () => {
+            reasonsSection.style.opacity = '0';
+            setTimeout(() => {
+                reasonsSection.style.display = 'none';
+                carouselSection.style.display = 'flex';
+                setTimeout(() => {
+                    carouselSection.style.opacity = '1';
+                }, 50);
+            }, 800);
+        });
+
+        // Music Controls Logic
+        musicBtn.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicBtn.textContent = '🔊';
+            } else {
+                bgMusic.pause();
+                musicBtn.textContent = '🔇';
+            }
+        });
+
+        volumeSlider.addEventListener('input', (e) => {
+            bgMusic.volume = e.target.value;
+        });
+
+        // 5. Carousel Logic
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) slide.classList.add('active');
+            });
+
+            // Handle buttons
+            if (index === slides.length - 1) {
+                nextBtn.style.display = 'none';
+                carouselFinishBtn.style.display = 'block';
+            } else {
+                nextBtn.style.display = 'flex';
+                carouselFinishBtn.style.display = 'none';
+            }
+
+            if (index === 0) {
+                prevBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'flex';
+            }
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+
+        // Initial check
+        showSlide(0);
+
+        // 6. Finish Carousel -> Proposal
+        carouselFinishBtn.addEventListener('click', () => {
+            carouselSection.style.opacity = '0';
+            setTimeout(() => {
+                carouselSection.style.display = 'none';
+                proposalSection.style.display = 'flex';
+                setTimeout(() => {
+                    proposalSection.style.opacity = '1';
+                }, 50);
+            }, 800);
+        });
+
+        // 7. No Button Avoidance & Growing Yes Button
+        let noClickCount = 0;
+        const noTexts = ["No 😢", "Are you sure?", "Really?", "Think again!", "Last chance!", "You can't do this!", "Please? 🥺", "Don't break my heart!"];
+        let yesScale = 1;
+
+        // Mouseover (PC) and Touchstart (Mobile)
+        const moveHandler = (e) => {
+            // Prevent default if it's touch to avoid accidental clicking
+            if (e.type === 'touchstart') e.preventDefault();
+
+            moveNoButton();
+        };
+
+        // Click handler for "No" to make it even harder and grow Yes
+        noBtn.addEventListener('click', () => {
+            noClickCount++;
+            // Update text
+            const textIndex = Math.min(noClickCount, noTexts.length - 1);
+            noBtn.textContent = noTexts[textIndex];
+
+            // Grow Yes button
+            yesScale += 0.2;
+            yesBtn.style.transform = `scale(${yesScale})`;
+
+            moveNoButton();
+        });
+
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('touchstart', moveHandler);
+
+        function moveNoButton() {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth) - (window.innerWidth / 2);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight) - (window.innerHeight / 2);
+
+            // Limit bounds to stay somewhat on screen
+            const maxX = window.innerWidth / 3;
+            const maxY = window.innerHeight / 3;
+
+            const safeX = Math.max(-maxX, Math.min(maxX, x));
+            const safeY = Math.max(-maxY, Math.min(maxY, y));
+
+            noBtn.style.transform = `translate(${safeX}px, ${safeY}px)`;
+        }
+
+        // 8. Yes Button Climax
+        yesBtn.addEventListener('click', () => {
+            startConfetti();
+            proposalSection.style.opacity = '0';
+            setTimeout(() => {
+                proposalSection.style.display = 'none';
+                successScreen.style.display = 'flex';
+                setTimeout(() => {
+                    successScreen.style.opacity = '1';
+                }, 50);
+            }, 500);
+        });
+
+        // --- EXTRAS ---
+
+        // Floating Hearts Background
+        function startFloatingHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 7000);
+            }, 400);
+        }
+
+        // Simple Canvas Confetti
+        function startConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.style.display = 'block';
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const pieces = [];
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#ff6b6b', '#ffa502'];
+
+            for (let i = 0; i < 400; i++) {
+                pieces.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    w: Math.random() * 10 + 5,
+                    h: Math.random() * 10 + 5,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speed: Math.random() * 5 + 2,
+                    angle: Math.random() * Math.PI * 2,
+                    spin: Math.random() * 0.2 - 0.1
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                pieces.forEach(p => {
+                    ctx.fillStyle = p.color;
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.angle);
+                    ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                    ctx.restore();
+                    p.y += p.speed;
+                    p.angle += p.spin;
+                    if (p.y > canvas.height) p.y = -20;
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        // 9. Resize handler for confetti
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('confetti-canvas');
+            if (canvas.style.display === 'block') {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+        });
+
+    </script>
+</body>
+
+</html>
